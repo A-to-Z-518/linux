@@ -1,0 +1,464 @@
+
+<#0>一、 linux ：历史与发展  
+
+1.GUN
+	Linux不是一个操作系统，严格来讲，Linux只是一个操作系统中的内核。
+	内核是什么？内核建立了计算机软件与硬件之间通讯的平台，内核提供系统服务，
+	比如文件管理、虚拟内存、设备I/O等。
+		
+		GUN = GNU is Not Unix
+		
+		GNU 自由软件联盟
+		
+		GNU宗旨:
+			开发出免费、开源的软件供大家使用
+
+2.GPL		
+
+		GPL = General Public License协议
+
+		规定了GNU中的软件使用的权限(版权)
+
+
+3.linux 发行版本：  redhat   Ubuntu
+
+<#0>二、linux使用：一切皆文件
+<#1>1.终端    我们对于linux的操作，使用终端，我们在终端下输入命令来操作linux，一般情况下鼠标没什么用
+开启新的终端
+	(1)ctrl+alt+t
+	或者
+	(2)ctrl+shift+t
+	
+	ls 命令 list  列出某个目录下所有的文件
+	
+	ls 列出当前目录下所有的文件
+
+	cd 进入一个目录(文件夹)
+	
+	.    当前目录  
+	..   上一级目录      当前路径的上一级路径  如果当前路径是 ~/aaaa，那么它的上一级是 ~
+	-    上一次目录			从a路径进入b路径，那么上一次的路径就是a路径，a可能和b没有什么关系
+	~    用户主目录    linux为每个用户单独开辟了一段硬盘的空间，在这个空间下用户可以随意操作
+	/    根目录   			在linux下 /是最高级路径
+
+绝对路径、相对路径  ： 
+绝对路径：以根目录为起点的目录全称。    东南西北
+相对路径：相对于当前目录的路径名称。		上下左右
+
+现在我的用户目录下有aaaa文件夹，
+以绝对路径进入aaaa    cd  /home/linux/aaaa
+以相对路径进入aaaa    cd  ./aaaa   这里的./可以省略，因为不写./默认也是以当前路径开查找
+
+练习：光标停留在用户主目录，在用户主目录下的桌面使用相对路径创建文件test1.c,
+	使用绝对路径创建文件test2.c。本题不可以使用cd
+	
+	touch  (绝对或者相对)路径/文件名
+
+
+
+
+
+
+<#1>2.目录结构
+		/ 根目录 
+		home linux上各个普通用户的家目录 子目录名称以该用户命名
+		root root用户的家目录 
+		bin 二进制文件 所有用户都可以执行(常用的命令文件 不能含有子目录)
+		dev 设备文件
+		etc 配置文件
+		lib 库文件
+		mnt 挂载服务
+		media 为光盘 u盘提供默认的挂载目
+		boot linux系统的引导装载程序 
+		proc 系统相关信息(内核)
+		opt 某些第三方应用程序安装软件
+		var 该目录及其子目录存放经常变化的数据 比如：系统日志 数据库文件
+		usr 存放不经常变化的数据  比如：帮助手册 壁纸
+		
+<#1>3.命令
+
+<#2>3.1 linux快捷键:
+		
+(1)上下键  能调出历史命令
+		
+(2)tab键 能补齐文件名或者命令
+		cd Pi+tab //linux下区分大小写
+		ctrl+l 清屏	//等价于clear 命令 清屏 
+		
+<#2>3.2 cd 命令
+	
+		cd ..  //上一级  
+		cd ~   //进入用户工作目录 
+		cd -   //返回到上一次的位置 并打印出绝对路径	
+		
+<#2>3.3 pwd命令  显示当前所在路径
+
+练习：	这里给的都是绝对路径
+第三个同学做，截图给我看  1分  第一个做出来的2分
+(1)切换到/usr/share/man目录
+
+(2)切换到/usr/share目录
+
+(3)切换到/usr/share/doc目录
+
+(4)切回到/usr目录
+
+(5)切回到用户的工作目录
+
+
+
+
+
+
+
+<#2>3.4 ls
+
+以颜色来区分不同的文件类型： 
+深蓝色：  目录文件  
+绿色：    可执行文件  
+白色：    普通文件  
+红色：    压缩文件  
+淡蓝色：  链接文件  （windows快捷方式）
+		
+ls -l   
+
+文件属性     文件所有者 文件所属组  文件大小     生成日期    文件名称  
+-rwxrwxr-x 1    linux     linux       7491     Apr 20 16:20   a.out
+-rw-rw-r-- 1    linux     linux        269     Apr 18 14:38   arr.c
+drwxr-xr-x 2    linux     linux       4096     Apr 17 16:54   Downloads
+
+文件属性：   分为两部分：
+第一部分： 第一个字符：含义是表明了文件的属性。 
+-  ：普通文件  
+d  ：目录文件   
+p  ：管道文件  （进程间通信用的）
+l  ：链接文件   
+b  ：块设备文件  
+...
+
+第二部分： 后九个字符： 分为三组：  rwx    r :可读    w：可写     x：可执行 
+
+对应针对的客户群的权限：
+文件所有者（创建文件的用户）   文件所属组   其他/访客 
+    rwx        										r-x          r-x
+
+
+ls -a     //打印出当前目录下的所有文件，包含隐藏文件. 
+
+ .config    //文件名称以 . 开头，是隐藏文件。 默认不打印。 
+
+ls 的其他用法： 
+ls -l Downloads/     // ls  + 选项 + 路径   
+
+<#2>3.5 chmod : change mode的缩写，改变模式		
+使用示例： 
+linux@ubuntu:~$ ls -l find.c
+-rw-rw-r-- 1 linux linux 697 Apr 19 15:46 find.c
+linux@ubuntu:~$ chmod 777 find.c   
+linux@ubuntu:~$ ls -l find.c		
+
+
+练习：
+最后一个做
+将文件a 改变权限  r-xrwx-wx
+
+
+
+
+
+
+
+<#2>3.6 touch      创建普通文件或者改变文件的时间戳(
+	在MakeFile编译文件的时候没有修改过的文件一般是不会被编译的，如果想让文件被编译，有没什么可修改的，那么可以
+		改变这个文件的时间戳)
+touch + 文件名(如果文件已存在是改变时间戳，不存在是创建文件)    touch a.c 
+
+
+
+
+
+<#2>3.7 mkdir      创建目录文件  make directory
+mkdir + 目录名称  
+例题：		
+(1)在用户的工作目录（~）下创建smile目录
+	cd ~
+	mkdir smile
+(2)在smile目录中创建文件file.txt 
+	cd smile
+	touch file.txt
+	
+(3)回到用户工作目录
+	cd ~
+
+
+
+
+
+<#2>3.8 rm    （remove） 删除文件    
+删除普通文件： rm  a.c  
+删除目录文件： rm  -r  smile
+  
+
+
+
+
+<#2>3.9 mv     (move) 功能： 1. 重命名   2. 移动文件   
+重命名： 
+mv + 操作的文件名 + 新文件名(非文件夹)  
+mv    a.out      hello   
+
+移动： 
+mv +  操作的文件名 + 路径（目标路径）
+mv  a.out  Downloads/
+
+例题：		
+1 创建目录/home/linux/source （/home/linux 这个是我给你们的linux系统的用户目录）
+	mkdir /home/linux/source
+2 在source 目录下创建source1-source5共5个文件
+	cd /home/linux/source
+	touch source1
+	touch source2
+	touch source3
+	touch source4
+	touch source5
+3 移动source1到/home/linux下
+	mv source1 ..    这里仅仅是移动到上一级
+4 移动source2到/home/linux下并重命名为newsource2
+	mv source2 ../newsource2    这里是移动到上一级并且改名
+	或者
+	mv source2 ../
+	cd ..
+	mv source2 newsource2
+5 将source3重命名为s3
+	mv source3 s3
+6 删除source4
+	rm source4
+7 删除source
+	cd ..
+	rm -r source
+
+
+<#2>3.10 通配符    *   ?   []
+
+* ： 可以匹配所有字符(任意数量)。 
+示例： rm  *.c   删除所有的  .c  文件。   
+
+
+?  ： 可以匹配任意的一个字符。 
+示例： ls ?.c    结果：  a.c   (文件名只有一个字符的，这样的文件会列出)
+
+[]  :  可以匹配一个范围    这个范围是字符的范围，[]只能代表一个字符
+示例：  
+linux@ubuntu:~$ ls a[1-2].c      //列出 符合 1-2的所有文件。 
+a1.c  a2.c
+linux@ubuntu:~$ ls a[^1-2].c     //除了1-2之外的所有符合条件的文件。 
+a3.c  a4.c  a5.c  a6.c
+
+
+
+
+练习：
+	1 home/linux下创建目录shared及shared1
+	2 在shared1目录中创建9个子目录a1-a9
+	3 在a5中创建3个文件file1-file3
+	4 在shared目录中创建两个目录old和new
+	5 将shared目录更名为back
+	6 拷贝/usr/include/stdio.h 到old内     拷贝 cp  文件名  文件夹
+	7 移动shared1目录到back目录内 删除a1-a4 a6-a9 
+	8 将a5目录改名为front 并移动到new目录内
+
+谁做都行
+
+
+
+<#2>3.11 常用键  
+
+Tab   ： 自动补齐文件名，或者命令名  
+上下键： 可以调出历史命令。
+
+<#2>3.12 vim  编辑器   用来写文本内容的
+
+打开方式  vim  文件名（文件名如果已经存在，打开文件；如果不存在，创建并打开文件）
+注意：vim 后面一定要有文件的名字
+
+进入以后在左下角出现[new file]说明这个文件是新创建的
+刚进入文件的时候，默认是命令模式，需要切换到输入模式才能写文本内容
+
+
+三种模式： 命令行模式、 插入模式i、 底行模式 :  
+
+命令行模式的快捷方式：  
+yy      复制一行
+nyy     复制n行   也可以使用ynn    将光标移动到要复制的第一行，n = 要复制的最后一行的行号减去第一行的行号
+p       粘贴     粘贴到光标当前位置的下一行
+u       撤销 
+dw      剪切单词  
+dd      剪切 
+ndd     剪切n行  也可以使用dn
+G       跳转   5G 跳转到5行。 :行数  
+v…y     选择复制。首先，将光标移至要复制的首位置，按下字母v，
+				然后，移动光标到复制的末位置，按下y，复制完毕。 
+ZZ      保存并退出  
+
+千万不要在没有保存退出wim编辑器的情况下关闭终端
+
+由命令行模式进入插入模式 ：
+左下角出现 --INSERT--
+以下字母： 相同点是都能进入插入模式，不同点如下列出：  
+i    光标不动。 
+I    光标移至当前行的首个不为空的位置。 
+a    光标移动到下一个位置。 
+A    光标移动到行尾。 
+o    光标所在行的下一行创建新的一行。 
+O    光标所在行的上一行创建新的一行。 
+
+ESC退出输入模式回到命令模式——ESC是键盘左上角的一个键
+
+
+
+底行模式：  
+在命令模式下输入:
+:w     保存  
+:q     退出   
+:wq    保存并退出
+:x     同 :wq 
+:q!    强制退出  （不保存）
+:wq!   强制保存退出  
+
+（底行）查找：  
+/  或  ?  实现查找功能： 
+使用示例：   /printf    ?case    //符号后接要查找的关键字 
+
+（底行）替换： 
+示例：  :% s/print_arr/hello/gc  
+
+格式：   :range   s/string1/string2/gc    
+range   ：范围：  % ：整个文件。 
+		1,20 : 第一到 二十行。 
+s       ：代表替换 
+string1 ：要被替换掉的单词  
+string2 ：用string2 将 string1 替换掉。 
+g       ：可选项。 如果选填，则替换所有。 
+c       ：可选项。 如果选填，则在替换之前询问。 
+
+
+
+
+
+<#0>4. gcc编译器
+编译器：将C语言代码翻译成机器码的工具。因为计算机不认识C语言，只认识机器码。
+用机器码编程不行吗？行！
+编辑器：是写代码的工具。 我们的课程使用VIM编辑器，用GCC编译器。
+
+
+GCC是一个编译器, 是GNU组织主要的编译工具
+
+visual studio     ///只能编译x86平台下(windows)的程序  IDE 集成开发环境  vi编辑器 gcc编译器 gdb调试器
+
+gcc 是一个跨平台(跨软件平台 和 硬件平台)的编译器    操作系统（windows linux ios） 软件框架（spring） 游戏引擎（cocos2d-x unity3d）
+
+windows中有很多IDE(keil eclipse ... 内部使用的是gcc)
+
+gcc 编译程序的重要选项参数
+
+-o   指定生成文件的名称
+gcc  hello.c -o hello	//编译hello.c 生成 hello        //-o 指定生成文件的名称
+
+如果出现命令  gcc test.c -o test.c  会出现问题！！  生成的可执行文件会覆盖掉源文件，代码没了~！
+
+gcc hello.c 如果后面不加-o指定生成的文件名，会默认生成a.out
+*********************************************************************************************
+	
+<#1>4.1 gcc 编译步骤
+
+经过了四步 1 预处理  2 编译  3 汇编   4 链接   
+
+(1) 预处理
+在编译之前做的事情  #include   #define
+
+如果只做预处理 gcc -E -o hello.i hello.c
+	1) 如果有头文件包含，就将头文件内容 copy 到预处理文件中
+		预处理文件通常 .i
+	2) 如果程序中有注释，会去掉注释
+	3) 如果程序中有宏定义，用宏值替换宏名
+
+(2) 编译(将c 文件变成汇编文件)
+如果只做编译 gcc -S -o hello.s hello.c
+	hello.s 是汇编语言源文件
+	汇编语言：是最低层的编程语言，不容易理解	
+
+(3) 汇编(将c 文件变成机器码文件(二进制文件))
+如果只做汇编 gcc -c hello.c, 会自动生成hello.o (机器码文件， 二进制文件)
+	hello.o (机器码文件， 二进制文件)
+	机器码文件 是 计算机硬件可以识别的代码
+	hello.o 又称为目标文件
+
+(4) 链接           ///将多个.o目标文件、库文件，链接在一起， 生成一个可执行文件
+	gcc  hello.c -o hello
+	库文件：printf 是系统实现的，系统会将printf做成库，给开发者用  
+	
+<#1>4.2 gcc编译多个文件(main.c   add.c    del.c)
+
+////////////////////main.c////////////////////////////
+void main()
+{
+	add();
+	del();
+}
+///////////////////add.c//////////////////////////////
+#include <stdio.h>
+void add()
+{
+	printf("add\n");
+}
+///////////////////del.c/////////////////////////////
+#include <stdio.h>
+void del()
+{
+	printf("del\n");
+}
+
+gcc -o main main.c add.c del.c
+
+
+<#1>4.3 程序编译问题有两种类型问题
+	
+(1)  错误(error)  , 如果有error程序编译通不过，运行不了
+(2)  警告(warning), 如果程序有警告，可以编译通过，并运行
+   可能会有问题，或者代码不规范，都是警告
+   
+error:
+1)
+hello.c:6:17: error: ‘b’ undeclared (first use in this function)
+hello.c 的第6行，有一个error， b 未定义 (通常是单词写错了)
+2)
+hello.c:4:1: error: expected declaration specifiers or ‘...’ before ‘{’ token
+通常是语法错误，少写了 ;  }  )
+3 )
+hello.c:(.text+0x21): undefined reference to `prntf'
+collect2: ld returned 1 exit status
+链接时的错误，找不到prntf, 通常也是单词写错了
+
+
+默认情况gcc代码检查不是很严格的，有些警告不显示
+如果想显示警告  
+
+-Wall 显示所有警告, 建议加-Wall
+
+-w    忽略所有警告, 建议不加此选项
+
+1 
+hello.c: In function ‘main’:
+hello.c:7:1: warning: control reaches end of non-void function [-Wreturn-type]
+在main函数中，有一个警告，在第7行，没写返回值
+2
+hello.c:6:8: warning: ‘a’ is used uninitialized in this function [-Wuninitialized]
+a 变量没有被初始化
+3
+hello.c:5:6: warning: unused variable ‘a’ [-Wunused-variable]
+定义了一个变量a，但没使用
+
+
+
+
+	
